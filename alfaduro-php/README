@@ -1,0 +1,373 @@
+# 🏪 Alfaduro - Swalayan Online
+
+Sistem E-Commerce Swalayan Online berbasis PHP dengan fitur lengkap untuk customer dan admin.
+
+---
+
+## 📋 Deskripsi Project
+
+**Alfaduro** adalah aplikasi web swalayan online yang memungkinkan customer untuk berbelanja produk kebutuhan sehari-hari secara online, dan admin untuk mengelola produk, kategori, pesanan, dan pengguna.
+
+### ✨ Fitur Utama
+
+#### 👥 Customer Features:
+- ✅ Register & Login
+- ✅ Browse produk dengan filter kategori
+- ✅ Tambah produk ke keranjang belanja
+- ✅ Update quantity & hapus item dari cart
+- ✅ Checkout dengan multiple payment methods
+- ✅ Konfirmasi pembayaran
+- ✅ Tracking status pesanan real-time
+- ✅ Riwayat pesanan lengkap
+
+#### 👨‍💼 Admin Features:
+- ✅ Dashboard dengan statistik
+- ✅ CRUD Produk (Create, Read, Update, Delete)
+- ✅ CRUD Kategori
+- ✅ Kelola pesanan (update status, resi, payment)
+- ✅ Kelola user (edit, ubah role, reset password)
+- ✅ Filter & search data
+- ✅ View detail lengkap setiap transaksi
+
+---
+
+## 🛠️ Technology Stack
+
+- **Backend:** PHP 8.2.12
+- **Database:** MySQL (via XAMPP)
+- **Frontend:** HTML5, CSS3, JavaScript
+- **Server:** Apache 2.4.58
+- **Tools:** XAMPP, VS Code
+
+---
+
+## 🗄️ Database Structure
+
+**Total: 12 Tabel**
+
+1. **users** - Data pengguna (customer & admin)
+2. **categories** - Kategori produk
+3. **products** - Data produk
+4. **inventory** - Stok produk
+5. **carts** - Keranjang belanja
+6. **cart_items** - Item di keranjang
+7. **orders** - Data pesanan
+8. **order_items** - Detail item pesanan
+9. **payments** - Data pembayaran
+10. **shipping** - Data pengiriman
+11. **reviews** - Ulasan produk (bonus)
+12. **promotions** - Promo/diskon (bonus)
+
+### 📊 Database Diagram
+```
+users (1) ----< (M) orders
+orders (1) ----< (M) order_items
+products (1) ----< (M) order_items
+products (M) >---- (1) categories
+products (1) ---- (1) inventory
+users (1) ---- (1) carts
+carts (1) ----< (M) cart_items
+orders (1) ---- (1) payments
+orders (1) ---- (1) shipping
+```
+
+---
+
+## 🎨 Design System
+
+### 🎨 Color Palette
+
+#### Primary Colors:
+- **Primary Blue:** `#3498db` - Buttons, links, accents
+- **Dark Blue:** `#2c3e50` - Navbar, headers, text
+- **Light Blue:** `#cce5ff` - Processing status background
+
+#### Status Colors:
+- **Success Green:** `#27ae60` - Success messages, delivered status, prices
+- **Warning Yellow:** `#f39c12` - Pending status, warnings
+- **Danger Red:** `#e74c3c` - Delete buttons, cancelled status
+- **Info Cyan:** `#17a2b8` - Information boxes
+
+#### Background Colors:
+- **White:** `#ffffff` - Cards, containers
+- **Light Gray:** `#f8f9fa` - Info boxes, alternate backgrounds
+- **Soft Gray:** `#f5f5f5` - Body background
+- **Border Gray:** `#ddd` - Borders
+
+#### Text Colors:
+- **Primary Text:** `#2c3e50` - Main text
+- **Secondary Text:** `#7f8c8d` - Descriptions, labels
+- **Muted Text:** `#95a5a6` - Footer text
+
+#### Gradient Colors:
+- **Purple Gradient:** `linear-gradient(135deg, #667eea 0%, #764ba2 100%)` - Stats cards, product placeholders
+- **Pink Gradient:** `linear-gradient(135deg, #f093fb 0%, #f5576c 100%)` - Accent cards
+- **Cyan Gradient:** `linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)` - Info cards
+- **Green Gradient:** `linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)` - Success cards
+
+#### Status Badge Colors:
+- **Pending:** Background `#fff3cd`, Text `#856404`
+- **Processing:** Background `#cce5ff`, Text `#004085`
+- **Shipped:** Background `#e2d1f1`, Text `#6c3483`
+- **Delivered:** Background `#d4edda`, Text `#155724`
+- **Cancelled:** Background `#f8d7da`, Text `#721c24`
+
+---
+
+### 📦 Icons Used
+
+#### Emoji Icons (Native):
+- 🏪 - Store/Shop (Logo, Brand)
+- 📦 - Package/Box (Products, Orders)
+- 🛒 - Shopping Cart (Cart)
+- 👤 - User (Profile, Customer)
+- 👥 - Users (User Management)
+- 👨‍💼 - Admin (Admin Role)
+- 💳 - Payment (Payment Methods)
+- 💰 - Money (Revenue, Prices)
+- 🚚 - Delivery Truck (Shipping)
+- 📱 - Mobile/Phone (Contact, E-Wallet)
+- 📧 - Email (Contact)
+- 📅 - Calendar (Dates)
+- 📍 - Location Pin (Address, Tracking)
+- 🔐 - Lock (Login, Security)
+- 🔑 - Key (Password Reset)
+- 📝 - Note (Register, Forms)
+- ✅ - Check Mark (Success, Completed)
+- ❌ - Cross Mark (Cancel, Delete)
+- ⏳ - Hourglass (Pending, Waiting)
+- 🔄 - Refresh (Update, Processing)
+- 👁️ - Eye (View Details)
+- ✏️ - Pencil (Edit)
+- 🗑️ - Trash (Delete)
+- ⭐ - Star (Reviews, Rating)
+- 📁 - Folder (Categories)
+- 🔍 - Magnifying Glass (Search)
+- 💾 - Floppy Disk (Save)
+- ← → - Arrows (Navigation)
+- ⚠️ - Warning (Alerts)
+
+**Alasan Pakai Emoji:**
+- ✅ Tidak perlu library eksternal
+- ✅ Load cepat
+- ✅ Support semua browser modern
+- ✅ Konsisten di semua device
+- ✅ Mudah maintain
+
+---
+
+## 📁 Project Structure
+```
+alfaduro/
+│
+├── index.php                 # Landing page / redirect
+│
+├── config/
+│   ├── database.php          # Database connection
+│   └── csrf.php              # CSRF protection (optional)
+│
+├── admin/                    # Admin Panel
+│   ├── index.php             # Dashboard
+│   ├── products.php          # CRUD Products
+│   ├── categories.php        # CRUD Categories
+│   ├── orders.php            # Order Management
+│   ├── order_detail.php      # Order Detail
+│   └── users.php             # User Management
+│
+├── customer/                 # Customer Panel
+│   ├── index.php             # Product Catalog
+│   ├── cart.php              # Shopping Cart
+│   ├── cart_process.php      # Cart Operations
+│   ├── checkout.php          # Checkout Page
+│   ├── order_success.php     # Order Success
+│   ├── orders.php            # Order History
+│   ├── order_detail.php      # Order Detail
+│   └── payment.php           # Payment Page
+│
+├── auth/                     # Authentication
+│   ├── login.php             # Login
+│   ├── register.php          # Register
+│   └── logout.php            # Logout
+│
+├── includes/                 # Reusable Components
+│   ├── header.php            # Header
+│   └── footer.php            # Footer
+│
+└── assets/                   # Static Assets
+    ├── css/
+    │   └── style.css         # Main stylesheet
+    ├── js/
+    │   └── script.js         # JavaScript (optional)
+    └── images/               # Product images
+```
+
+---
+
+## ⚙️ Installation Guide
+
+### Prerequisites:
+- XAMPP (Apache + MySQL + PHP)
+- Browser modern (Chrome, Firefox, Edge)
+- Text Editor (VS Code recommended)
+
+### Steps:
+
+1. **Clone/Download Project**
+```bash
+   # Copy folder alfaduro ke C:\xampp\htdocs\
+```
+
+2. **Start XAMPP**
+   - Buka XAMPP Control Panel
+   - Start **Apache** dan **MySQL**
+
+3. **Create Database**
+   - Buka browser: `http://localhost/phpmyadmin`
+   - Klik **"New"**
+   - Nama database: `alfaduro`
+   - Collation: `utf8mb4_general_ci`
+   - Klik **"Create"**
+
+4. **Import Database Schema**
+   - Pilih database `alfaduro`
+   - Klik tab **"SQL"**
+   - Copy paste semua SQL dari dokumentasi
+   - Klik **"Go"**
+
+5. **Configure Database Connection**
+   - Buka file `config/database.php`
+   - Sesuaikan:
+```php
+     private $host = "localhost";
+     private $db_name = "alfaduro";
+     private $username = "root";
+     private $password = "";
+```
+
+6. **Access Application**
+   - Buka browser: `http://localhost/alfaduro`
+   - Login dengan:
+     - **Admin:** username: `admin`, password: `admin123`
+     - **Customer:** Register akun baru
+
+---
+
+## 👤 Default Accounts
+
+### Admin Account:
+- **Username:** admin
+- **Password:** admin123
+- **Email:** admin@alfaduro.com
+
+### Customer Account:
+- **Username:** customer
+- **Password:** customer123
+- **Email:** customer@email.com
+
+*(Atau buat akun baru via Register)*
+
+---
+
+## 🔐 Security Features
+
+- ✅ Password hashing dengan `bcrypt`
+- ✅ Prepared statements (PDO) untuk prevent SQL Injection
+- ✅ Session management
+- ✅ Role-based access control (Admin/Customer)
+- ✅ Input validation & sanitization
+- ✅ CSRF protection (optional)
+
+---
+
+## 📸 Screenshots
+
+### Customer Interface:
+- Homepage dengan katalog produk
+- Keranjang belanja
+- Checkout & pembayaran
+- Riwayat pesanan
+
+### Admin Interface:
+- Dashboard dengan statistik
+- Manajemen produk & kategori
+- Kelola pesanan
+- Manajemen user
+
+---
+
+## 🚀 Usage
+
+### As Customer:
+1. Register akun baru
+2. Browse produk & filter by kategori
+3. Tambah produk ke cart
+4. Checkout & pilih metode pembayaran
+5. Konfirmasi pembayaran
+6. Track status pesanan
+
+### As Admin:
+1. Login dengan akun admin
+2. Kelola produk & kategori
+3. Pantau pesanan masuk
+4. Update status pesanan & input resi
+5. Konfirmasi pembayaran
+6. Kelola user
+
+---
+
+## 🐛 Known Issues & Limitations
+
+- ❌ Tidak support upload gambar (menggunakan URL)
+- ❌ Tidak ada email notification
+- ❌ Pembayaran masih manual (belum integrasi payment gateway)
+- ❌ Tidak responsive (desktop only)
+
+---
+
+## 🔮 Future Improvements
+
+- [ ] Upload gambar produk
+- [ ] Email notification
+- [ ] Integrasi payment gateway (Midtrans, Xendit)
+- [ ] Responsive design
+- [ ] Export data ke Excel/PDF
+- [ ] Dashboard analytics lebih detail
+- [ ] Review & rating produk
+- [ ] Wishlist feature
+- [ ] Promo & voucher system
+- [ ] Live chat support
+
+---
+
+## 👨‍💻 Developer
+
+- **Name:** [Muhammad Syahril Alauddin], [Hansen Marcellino], [RUVY RIZQULLAH AMMAR HIDAYAT]
+- **NIM:** [2802404551], [2802396474], [2802485832]
+- **Class:** [LAB - BB20]
+- **Subject:** Database Technology - Final Project
+
+---
+
+## 📝 License
+
+This project is created for educational purposes (Final Project - Database Technology).
+
+---
+
+## 🙏 Acknowledgments
+
+- Dosen Database Technology
+- Stack Overflow Community
+- PHP Documentation
+
+---
+
+## 📞 Contact & Support
+
+Jika ada pertanyaan atau butuh bantuan:
+- **Email:** [muhammad.alauddin001@binus.ac.id], [hansen.marcellino@binus.ac.id], [ruvy.hidayat@binus.ac.id]
+- **GitHub:** [-]
+
+---
+
+<!-- **tengs oll** -->
